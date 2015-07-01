@@ -1,0 +1,23 @@
+//Ad SKINS
+function loadAdSkinBkg(bgrnd_skin_bgColor,bgrnd_skin_imageSrc,bgrnd_skin_linkTarget){
+	$('body','html').css({"background-image":"none","background-color":bgrnd_skin_bgColor});
+	$('body','html').css({"background-image":bgrnd_skin_imageSrc, "background-position":"center top","background-repeat":"no-repeat"}).prepend('<a id="skin_background" href="'+ bgrnd_skin_linkTarget+'" target="_blank">&nbsp;</a>');
+	$.getDocHeight = function(){
+	    return Math.max(
+	        $(document).height(),
+	        $(window).height(),
+	        document.documentElement.clientHeight
+	    );
+	};
+	var bgrnd_link_height = $.getDocHeight;
+	$("#skin_background").css({"height":bgrnd_link_height});
+	}
+ 
+function skin_background(){
+if (bgrnd_skin_linkTarget == "" || bgrnd_skin_bgColor == "" || bgrnd_skin_imageSrc == "") {
+	null;
+	}
+else {
+	loadAdSkinBkg();
+	}	
+}
