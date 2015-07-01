@@ -1,0 +1,222 @@
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>AdvertServe User Manual :: v2.5 :: DoubleClick DART Click Tracking</TITLE>
+<SCRIPT type="text/javascript">
+        var transPixel = "../../images/invisible.gif";
+      </SCRIPT><SCRIPT type="text/javascript" src="../../scripts/browser.js"></SCRIPT><SCRIPT type="text/javascript" src="../../scripts/png.js"></SCRIPT><SCRIPT type="text/javascript" src="../../scripts/highlight.js"></SCRIPT>
+<LINK href="../../styles/manual-callouts.css" rel="stylesheet">
+<LINK href="../../styles/manual-common.css" rel="stylesheet">
+<LINK href="../../styles/manual-page.css" rel="stylesheet">
+<LINK href="../../styles/manual-nav.css" rel="stylesheet">
+<LINK href="../../styles/highlight.css" rel="stylesheet">
+</HEAD>
+<BODY>
+<DIV class="masthead">AdvertServe User Manual :: v2.5</DIV>
+<DIV class="pagenav_top">
+<DIV class="pagenav_top_left">
+<P class="pagenav_text">
+<A target="_self" href="../../html/manual/thirdparty.html">&lt; Previous Page</A>
+</P>
+<BR>
+<P class="pagenav_text">Third Party Click Tracking</P>
+</DIV>
+<DIV class="pagenav_top_center">
+<P class="pagenav_text">
+<A target="_self" href="index.html">Index</A>
+</P>
+</DIV>
+<DIV class="pagenav_top_right">
+<P class="pagenav_text">
+          Next Page &gt;
+        </P>
+<BR>
+<P class="pagenav_hidetext">
+          XXX
+        </P>
+</DIV>
+</DIV>
+<H1>DoubleClick DART Click Tracking</H1><A name="javascript"></A><H2>JavaScript Code</H2>
+        
+<H3>Original Code</H3>
+        
+<P>
+          You should have received some JavaScript code from DoubleClick DART that looks like the following:
+        </P>
+        
+<PRE>
+<CODE>
+&lt;SCRIPT language='JavaScript1.1' SRC="http://ad.doubleclick.net/adj/N270.site.com/B17804;sz=468x60;ord=[timestamp]?"&gt;&lt;/script&gt;
+&lt;NOSCRIPT&gt;
+&lt;A HREF="http://ad.doubleclick.net/jump/N270.site.com/B17804; sz=468x60;ord=[timestamp]?"&gt;
+&lt;IMG SRC="http://ad.doubleclick.net/ad/N270.site.com/B17804;sz=468x60;ord=[timestamp]?" BORDER=0 WIDTH=468 HEIGHT=60 ALT="Click Here!"&gt;Click Here!&lt;/A&gt;
+&lt;/NOSCRIPT&gt;</CODE>
+</PRE>
+        
+<H3>Modified Code</H3>
+        
+<P>
+          What you need to do is modify the URL in the &lt;SCRIPT&gt; and &lt;A&gt; tags as shown by the <SPAN class="highlight">highlighted</SPAN> changes:
+        </P>
+        
+<PRE>
+<CODE>
+&lt;SCRIPT language='JavaScript1.1' SRC="http://ad.doubleclick.net/adj/N270.site.com/B17804;sz=468x60<SPAN class="highlight">;click=%%CLICKLINK%%</SPAN>;ord=[timestamp]?"&gt;&lt;/script&gt;
+&lt;NOSCRIPT&gt;
+&lt;A HREF="<SPAN class="highlight">%%CLICKLINK%%</SPAN>http://ad.doubleclick.net/jump/N270.site.com/B17804; sz=468x60;ord=[timestamp]?"&gt;
+&lt;IMG SRC="http://ad.doubleclick.net/ad/N270.site.com/B17804;sz=468x60;ord=[timestamp]?" BORDER=0 WIDTH=468 HEIGHT=60 ALT="Click Here!"&gt;Click Here!&lt;/A&gt;
+&lt;/NOSCRIPT&gt;</CODE>
+</PRE>
+        
+<DIV class="warn">
+<H3>
+<IMG onload="javascript:fixAlphaPNG(this)" alt="Warning" height="32" width="32" border="0" src="../../images/warn.png" class="icon"> Warning
+      </H3>
+<DIV class="warn_text">
+          Make sure to preview the media and test clicking on it after it's created.  If it fails to click through
+          properly, try changing the bold <B>%%CLICKLINK%%</B> in the <B>&lt;SCRIPT&gt;</B> tag
+          to <B>%%CLICKTAG%%</B> instead.  This is sometimes necessary if
+          DoubleClick themselves are sourcing the ad from another third party.
+        </DIV>
+</DIV>
+        
+<DIV class="note">
+<H3>
+<IMG onload="javascript:fixAlphaPNG(this)" alt="Note" height="32" width="32" border="0" src="../../images/note.png" class="icon"> Note
+      </H3>
+<DIV class="note_text">
+          The ad server recognizes the <B>[timestamp]</B> placeholder and will automatically replace it with a
+          timestamp.  It is not necessary to convert it to the <B>%%TIMESTAMP%%</B> macro manually.
+        </DIV>
+</DIV>
+      <A name="iframe"></A><H2>IFRAME</H2>
+        
+<H3>Original Code</H3>
+        
+<P>
+          You should have received some IFRAME code from DoubleClick DART that looks like the following:
+        </P>
+        
+<PRE>
+<CODE>
+&lt;IFRAME SRC="http://ad.doubleclick.net/adi/N884.sitename/B3453509.2;sz=300x250;ord=[timestamp]?" WIDTH=300 HEIGHT=250 MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no BORDERCOLOR='#000000'&gt;
+&lt;SCRIPT language='JavaScript1.1' SRC="http://ad.doubleclick.net/adj/N884.sitename/B3453509.2;abr=!ie;sz=300x250;ord=[timestamp]?"&gt;
+&lt;/SCRIPT&gt;
+&lt;NOSCRIPT&gt;
+&lt;A HREF="http://ad.doubleclick.net/jump/N884.sitename/B3453509.2;abr=!ie4;abr=!ie5;sz=300x250;ord=[timestamp]?"&gt;
+&lt;IMG SRC="http://ad.doubleclick.net/ad/N884.sitename/B3453509.2;abr=!ie4;abr=!ie5;sz=300x250;ord=[timestamp]?" BORDER=0 WIDTH=300 HEIGHT=250 ALT="Click Here"&gt;
+&lt;/A&gt;
+&lt;/NOSCRIPT&gt;
+&lt;/IFRAME&gt;</CODE>
+</PRE>
+        
+<H3>Modified Code</H3>
+        
+<P>
+          What you need to do is modify the URL in the &lt;IFRAME&gt;, &lt;SCRIPT&gt; and &lt;A&gt; tags as shown by the <SPAN class="highlight">highlighted</SPAN> changes:
+        </P>
+        
+<PRE>
+<CODE>
+&lt;IFRAME SRC="http://ad.doubleclick.net/adi/N884.sitename/B3453509.2;sz=300x250<SPAN class="highlight">;click=%%CLICKLINK%%</SPAN>;ord=[timestamp]?" WIDTH=300 HEIGHT=250 MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no BORDERCOLOR='#000000'&gt;
+&lt;SCRIPT language='JavaScript1.1' SRC="http://ad.doubleclick.net/adj/N884.sitename/B3453509.2;abr=!ie;sz=300x250<SPAN class="highlight">;click=%%CLICKLINK%%</SPAN>;ord=[timestamp]?"&gt;
+&lt;/SCRIPT&gt;
+&lt;NOSCRIPT&gt;
+&lt;A HREF="<SPAN class="highlight">%%CLICKLINK%%</SPAN>http://ad.doubleclick.net/jump/N884.sitename/B3453509.2;abr=!ie4;abr=!ie5;sz=300x250;ord=[timestamp]?"&gt;
+&lt;IMG SRC="http://ad.doubleclick.net/ad/N884.sitename/B3453509.2;abr=!ie4;abr=!ie5;sz=300x250;ord=[timestamp]?" BORDER=0 WIDTH=300 HEIGHT=250 ALT="Click Here"&gt;
+&lt;/A&gt;
+&lt;/NOSCRIPT&gt;
+&lt;/IFRAME&gt;</CODE>
+</PRE>
+        
+<DIV class="warn">
+<H3>
+<IMG onload="javascript:fixAlphaPNG(this)" alt="Warning" height="32" width="32" border="0" src="../../images/warn.png" class="icon"> Warning
+      </H3>
+<DIV class="warn_text">
+          Make sure to preview the media and test clicking on it after it's created.  If it fails to click through
+          properly, try changing the bold <B>%%CLICKLINK%%</B> in the <B>&lt;SCRIPT&gt;</B> and
+          <B>&lt;IFRAME&gt;</B> tags to <B>%%CLICKTAG%%</B> instead.  This is sometimes necessary if
+          DoubleClick themselves are sourcing the ad from another third party.
+        </DIV>
+</DIV>
+        
+<DIV class="note">
+<H3>
+<IMG onload="javascript:fixAlphaPNG(this)" alt="Note" height="32" width="32" border="0" src="../../images/note.png" class="icon"> Note
+      </H3>
+<DIV class="note_text">
+          The ad server recognizes the <B>[timestamp]</B> placeholder and will automatically replace it with a
+          timestamp.  It is not necessary to convert it to the <B>%%TIMESTAMP%%</B> macro manually.
+        </DIV>
+</DIV>
+      <A name="image"></A><H2>IMG Code</H2>
+        
+<H3>Original Code</H3>
+        
+<P>
+          You should have received some IMG code from DoubleClick DART that looks like the following:
+        </P>
+        
+<PRE>
+<CODE>
+&lt;A HREF="http://ad.doubleclick.net/jump/N884.sitename/B2343505.2;sz=300x250;ord=[timestamp]?"&gt;
+&lt;IMG SRC="http://ad.doubleclick.net/ad/N884.sitename/B2343505.2;sz=300x250;ord=[timestamp]?" BORDER=0 WIDTH=300 HEIGHT=250 ALT="Click Here"&gt;
+&lt;/A&gt;</CODE>
+</PRE>
+        
+<H3>Modified Code</H3>
+        
+<P>
+          What you need to do is modify the URL in the &lt;A&gt; tag as shown by the <SPAN class="highlight">highlighted</SPAN> changes:
+        </P>
+        
+<PRE>
+<CODE>
+&lt;A HREF="<SPAN class="highlight">%%CLICKLINK%%</SPAN>http://ad.doubleclick.net/jump/N884.sitename/B2343505.2;sz=300x250;ord=[timestamp]?" <SPAN class="highlight">target="_blank"</SPAN>&gt;
+&lt;IMG SRC="http://ad.doubleclick.net/ad/N884.sitename/B2343505.2;sz=300x250;ord=[timestamp]?" BORDER=0 WIDTH=300 HEIGHT=250 ALT="Click Here"&gt;
+&lt;/A&gt;</CODE>
+</PRE>
+        
+<DIV class="note">
+<H3>
+<IMG onload="javascript:fixAlphaPNG(this)" alt="Note" height="32" width="32" border="0" src="../../images/note.png" class="icon"> Note
+      </H3>
+<DIV class="note_text">
+          The ad server recognizes the <B>[timestamp]</B> placeholder and will automatically replace it with a
+          timestamp.  It is not necessary to convert it to the <B>%%TIMESTAMP%%</B> macro manually.
+        </DIV>
+</DIV>
+      
+<DIV class="pagenav_bottom">
+<DIV class="pagenav_bottom_left">
+<P class="pagenav_text">
+<A target="_self" href="../../html/manual/thirdparty.html">&lt; Previous Page</A>
+</P>
+<BR>
+<P class="pagenav_text">Third Party Click Tracking</P>
+</DIV>
+<DIV class="pagenav_bottom_center">
+<P class="pagenav_text">
+<A target="_self" href="index.html">Index</A>
+</P>
+</DIV>
+<DIV class="pagenav_bottom_right">
+<P class="pagenav_text">
+          Next Page &gt;
+        </P>
+<BR>
+<P class="pagenav_hidetext">
+          XXX
+        </P>
+</DIV>
+</DIV>
+<DIV class="copyright">
+        Copyright (C) 1998-2012 by Renegade Internet.  All rights reserved.
+      </DIV>
+<SCRIPT type="text/javascript">
+        hljs.tabReplace = '    ';
+        hljs.initHighlightingOnLoad();
+      </SCRIPT>
+</BODY>
+</HTML>
